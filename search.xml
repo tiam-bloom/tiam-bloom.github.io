@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Git常用命令</title>
+      <link href="/artical/caff8000.html"/>
+      <url>/artical/caff8000.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="Git常用命令"><a href="#Git常用命令" class="headerlink" title="Git常用命令"></a>Git常用命令</h1><table><thead><tr><th align="center">命令</th><th align="center">说明</th></tr></thead><tbody><tr><td align="center"><code>git init</code></td><td align="center">初始化本地仓库</td></tr><tr><td align="center"><code>git commit -am “第一次提交”</code></td><td align="center">添加并提交到本地库</td></tr><tr><td align="center"><code>git status</code></td><td align="center">查看当前文件状态</td></tr><tr><td align="center"><code>git reflog</code></td><td align="center">查看简洁日志</td></tr><tr><td align="center"><code>git log</code></td><td align="center">查看完整日志</td></tr><tr><td align="center"><code>git remote</code></td><td align="center">查看添加的远程库</td></tr><tr><td align="center"><code>git remote add origin [远程库地址]</code></td><td align="center">添加一个别名为<code>origin</code>的远程库</td></tr><tr><td align="center"><code>git push -u origin main</code></td><td align="center">将本地库<code>main</code>分支推送到<code>origin</code>远程库的<code>main</code>分支</td></tr><tr><td align="center"><code>git push -u [远程库地址] main</code></td><td align="center">将本地库<code>main</code>分支推送到<code>[远程库地址]</code>所在的远程库的<code>main</code>分支</td></tr><tr><td align="center"><code>git push -u origin master:main</code></td><td align="center">将本地库<code>master</code>分支推送到<code>origin</code>远程库的<code>main</code>分支</td></tr><tr><td align="center"><code>git remote rm origin</code></td><td align="center">删除<code>origin</code>远程库</td></tr><tr><td align="center">分支</td><td align="center"></td></tr><tr><td align="center"><code>git branch -v</code></td><td align="center">查看所有分支</td></tr><tr><td align="center"><code>git branch dev</code></td><td align="center">创建一个名为<code>dev</code>的分支</td></tr><tr><td align="center"><code>git checkout dev</code></td><td align="center">切换到<code>dev</code>分支</td></tr><tr><td align="center"><code>git checkout -b dev</code></td><td align="center">创建一个名为<code>dev</code>的分支,  同时切换到<code>dev</code>分支</td></tr><tr><td align="center"><code>git branch -M test</code></td><td align="center">将当前所在分支更名为<code>test</code></td></tr><tr><td align="center"><code>git merge main</code></td><td align="center">将<code>main</code>分支合并到当前分支(可能会产生冲突, 需手动处理)</td></tr><tr><td align="center"><code>git reset –hard [版本号]</code></td><td align="center">切换到某个版本，可通过<code>git reflog</code>查看版本号</td></tr><tr><td align="center"><code>git branch --delete dev</code></td><td align="center">删除<code>dev</code>分支</td></tr><tr><td align="center"><code> git reset --hard HEAD</code></td><td align="center">恢复到最后一次提交的状态</td></tr><tr><td align="center"><code>git clone [远程库地址]</code></td><td align="center">克隆远程库的项目到本地</td></tr></tbody></table><h1 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h1><ul><li><p>官网:  <a href="https://git-scm.com/book/zh/v2">https://git-scm.com/book/zh/v2</a></p></li><li><p>常用命令:  <a href="https://yelog.org/2016/10/02/git-command/">https://yelog.org/2016/10/02/git-command/</a></p></li><li><p>git - 简易指南:   <a href="https://www.bootcss.com/p/git-guide/">https://www.bootcss.com/p/git-guide/</a></p></li><li><p>菜鸟Git教程:  <a href="https://www.runoob.com/git/git-tutorial.html">https://www.runoob.com/git/git-tutorial.html</a></p></li><li><p>Git大全:  <a href="https://gitee.com/all-about-git">https://gitee.com/all-about-git</a></p></li></ul><h1 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h1><p><img src="http://qiniu.yujing.fit/typora_img/Git.png" alt="Git"></p><h1 id="Pull-Request"><a href="#Pull-Request" class="headerlink" title="Pull Request"></a>Pull Request</h1><ol><li><code>fork</code>项目到本地仓库</li><li>对项目更改后提交到本地库</li><li>点击<code>Pull request</code>创建一个拉取请求</li><li>写入日志提交</li><li>仓库主点击Pull Request 查看更改的代码</li><li>选择是否合并请求</li></ol><h1 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h1><ul><li><code>push</code>之前应先<code>pull</code>保持版本最新</li></ul><h2 id="Github网络问题"><a href="#Github网络问题" class="headerlink" title="Github网络问题"></a>Github网络问题</h2><ul><li>使用<code>ssh</code>提交</li><li>更换使用<code>Gitee</code></li><li>多尝试几次</li><li>尝试下面两种方法</li></ul><p><strong>修改设置，解除ssl验证</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global http.sslVerify &quot;false&quot;</span><br></pre></td></tr></table></figure><p>取消代理</p><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global --unset http.proxy</span><br><span class="line">git config --global --unset https.proxy</span><br></pre></td></tr></table></figure><p>当两个仓库历史不一致时, <code>fatal: refusing to merge unrelated histories</code></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull https://gitee.com/yu-jing-Tiam/gitee_-web.git master --allow-unrelated-histories</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Git </tag>
+            
+            <tag> 学习笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Hexo基本安装和使用</title>
       <link href="/artical/148e19a2.html"/>
       <url>/artical/148e19a2.html</url>
