@@ -3920,7 +3920,7 @@ h1.page-title + .tag-cloud-list {
 #article-container a.headerlink:after {
   float: right;
   color: var(--headline-presudo);
-  content: '\3423';
+  content: '\f3c5';
   font-size: 0.95em;
   -webkit-transition: all 0.3s;
   -moz-transition: all 0.3s;
