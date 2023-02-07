@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>笔记App</title>
+      <link href="/artical/782b41df.html"/>
+      <url>/artical/782b41df.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="编辑器"><a href="#编辑器" class="headerlink" title="编辑器"></a>编辑器</h1><p>:::tip</p><p>小提示</p><p>:::</p><p>最初第一款用的记笔记软件是<a href="https://typoraio.cn/#"><code>Typora</code></a>，写md很舒服，不过后面开始收费了。就是有个问题，只能在保存在本地，图片用了OSS后可以自动上传云端了还可以，但是文件始终还是保存在本地的。</p><p>后面发现了一个云端的文档写作–<a href="https://www.yuque.com/">语雀</a>，可以在线编辑并且保存到云端，用了一段时间后总感觉样式差点，没有夜间模式，写多了一点还会有点卡。</p><ul><li>Typora</li><li>语雀</li><li>wolai</li><li>Gitbook</li><li>石墨文档</li><li>flomo</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 推荐 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Vue3项目基本搭建</title>
       <link href="/artical/1725adc6.html"/>
       <url>/artical/1725adc6.html</url>
