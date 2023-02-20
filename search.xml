@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>apply 与 call 的区别</title>
+      <link href="/artical/5bea93f3.html"/>
+      <url>/artical/5bea93f3.html</url>
+      
+        <content type="html"><![CDATA[<h1>apply 与 call</h1><p>共同点: 修改<code>this</code>指向问题</p><p>不同点: 参数的形式不同，apply是将多个参数组成一个数组，call是直接传入多个参数</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">number</span>&#125; begin </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">number</span>&#125; end </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">loop1</span>(<span class="params">begin = <span class="number">0</span>, end</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;loop1&quot;</span>);</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = begin; i &lt; end; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> k = i / <span class="number">1000</span>;  <span class="comment">// 执行一些操作</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 执行函数fun, 并返回其运行时间</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">Function</span>&#125; <span class="variable">fun</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  &#123;<span class="type">...any</span>&#125; args  rest参数, 可传入任意数量和类型的值, 传入fun函数的参数</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getRunningTime</span>(<span class="params">fun, ...args</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> begin = <span class="title class_">Date</span>.<span class="title function_">now</span>();</span><br><span class="line">  fun.<span class="title function_">apply</span>(<span class="variable language_">this</span>, args); <span class="comment">// args是一个数组, 与  fun.call(this, ...args); 功能相同</span></span><br><span class="line">  <span class="keyword">const</span> end = <span class="title class_">Date</span>.<span class="title function_">now</span>();</span><br><span class="line">  <span class="keyword">return</span> end - begin;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> time = <span class="title function_">getRunningTime</span>(loop1, <span class="number">1</span>, <span class="number">10000000</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(time);</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> JavaScript </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> js </tag>
+            
+            <tag> apply 与 call </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>防抖与节流</title>
       <link href="/artical/100fa4c9.html"/>
       <url>/artical/100fa4c9.html</url>
