@@ -231,6 +231,35 @@
     
     
     <entry>
+      <title>chatGPT API  使用 Demo （Vue）</title>
+      <link href="/artical/90236ad6.html"/>
+      <url>/artical/90236ad6.html</url>
+      
+        <content type="html"><![CDATA[<ul class="lvl-0"><li class="lvl-2"><p>API文档地址:  <a href="https://platform.openai.com/docs/api-reference/introduction">API Reference - OpenAI API</a></p></li><li class="lvl-2"><p>在线演示: <a href="https://platform.openai.com/playground">https://platform.openai.com/playground</a></p></li><li class="lvl-2"><p>微软:  <a href="https://www.bing.com/new">https://www.bing.com/new</a></p></li><li class="lvl-2"><p>准确度还并不是很高，未实现类似一个字一个字的生成，若返回的内容过多，可能需要很久</p></li></ul><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div class=&quot;mx-auto bg-white rounded-xl shadow-md items-center w-96&quot;&gt;</span><br><span class="line">        &lt;h1 class=&quot; text-red-500 mx-auto w-20&quot;&gt;chat GPT&lt;/h1&gt;</span><br><span class="line">        &lt;input class=&quot;w-80&quot; type=&quot;text&quot; @keydown.enter=&quot;sendRequest&quot; autofocus placeholder=&quot;请输入一个问题&quot;&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;ul&gt;</span><br><span class="line">                &lt;template v-for=&quot;dialogue of dialogues&quot;&gt;</span><br><span class="line">                    &lt;li&gt;Human: &#123;&#123; dialogue.ask &#125;&#125;&lt;/li&gt;</span><br><span class="line">                    &lt;li&gt;AI: &#123;&#123; dialogue.answer &#125;&#125;&lt;/li&gt;</span><br><span class="line">                &lt;/template&gt;</span><br><span class="line">            &lt;/ul&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script setup&gt;</span><br><span class="line">import &#123; Configuration, OpenAIApi &#125; from &quot;openai&quot;</span><br><span class="line">import &#123; reactive &#125; from &quot;vue&quot;;</span><br><span class="line">const configuration = new Configuration(&#123;</span><br><span class="line">    organization: &quot;orgination ID&quot;,</span><br><span class="line">    apiKey: &quot;APP key&quot;,</span><br><span class="line">&#125;);</span><br><span class="line">const openai = new OpenAIApi(configuration);</span><br><span class="line">const dialogues = reactive([]);</span><br><span class="line">// openai.listModels().then((response) =&gt; &#123;</span><br><span class="line">//     console.log(response);</span><br><span class="line">// &#125;);</span><br><span class="line">function sendRequest(e) &#123;</span><br><span class="line">    const mes = e.target.value;</span><br><span class="line">    e.target.value = &quot;&quot;;</span><br><span class="line">    dialogues.push(&#123;</span><br><span class="line">        ask: mes,</span><br><span class="line">        answer: &quot;loading...&quot;,</span><br><span class="line">    &#125;);</span><br><span class="line">    // https://platform.openai.com/docs/api-reference/introduction</span><br><span class="line">    openai.createCompletion(&#123;</span><br><span class="line">        model: &quot;text-davinci-003&quot;,</span><br><span class="line">        prompt: mes,</span><br><span class="line">        // max_tokens: 7,</span><br><span class="line">        // 随机性0~2</span><br><span class="line">        // temperature: 0,</span><br><span class="line">        // logprobs: 5,</span><br><span class="line">        // 是否显示自己所输入的</span><br><span class="line">        // echo: true,</span><br><span class="line">        temperature: 0.9,</span><br><span class="line">        max_tokens: 150,</span><br><span class="line">        top_p: 1,</span><br><span class="line">        frequency_penalty: 0,</span><br><span class="line">        presence_penalty: 0.6,</span><br><span class="line">        // stop: [&quot; Human:&quot;, &quot; AI:&quot;],</span><br><span class="line">    &#125;).then((response) =&gt; &#123;</span><br><span class="line">        console.log(response);</span><br><span class="line">        dialogues[dialogues.length - 1].answer = response.data.choices[0].text;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;8.41 lPX:/ # chatGPT 怎么不一样  https://v.douyin.com/BvSFDED/ 复制此链接，打开Dou音搜索，直接观看视频！</span><br></pre></td></tr></table></figure><blockquote><p>演示: <a href="https://v.douyin.com/BvSFDED/">https://v.douyin.com/BvSFDED/</a></p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> Vue </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> TailwindCss </tag>
+            
+            <tag> chatGPT </tag>
+            
+            <tag> Vue </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>vue3的响应式 | 渲染</title>
       <link href="/artical/dbdd9cef.html"/>
       <url>/artical/dbdd9cef.html</url>
