@@ -233,31 +233,6 @@
     
     
     <entry>
-      <title>win11小任务栏</title>
-      <link href="/artical/4a6887b1.html"/>
-      <url>/artical/4a6887b1.html</url>
-      
-        <content type="html"><![CDATA[<h2 id="win11小任务栏">win11小任务栏<a class="header-anchor" href="#win11小任务栏">#</a></h2><p>下载地址: <a href="https://www.startallback.com/">https://www.startallback.com/</a></p><p>原生没有了小任务栏</p><p><img src="http://qiniu.yujing.fit/typora_img/image-20230215005201739.png" alt="image-20230215005201739"></p><p>配置后的</p><p><img src="http://qiniu.yujing.fit/typora_img/image-20230215005443034.png" alt="image-20230215005443034"></p><ul class="lvl-0"><li class="lvl-2"><p>在任务栏右键点击<code>属性</code> , 重新打开配置界面</p></li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> 记录一下 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> startallback </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>chatGPTAPI使用Demo(Vue)</title>
       <link href="/artical/90236ad6.html"/>
       <url>/artical/90236ad6.html</url>
@@ -474,25 +449,6 @@
             <tag> API </tag>
             
         </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>分享一些记笔记的APP</title>
-      <link href="/artical/782b41df.html"/>
-      <url>/artical/782b41df.html</url>
-      
-        <content type="html"><![CDATA[<h1>个人博客</h1><p>最初第一款用的记笔记软件是<a href="https://typoraio.cn/#"><code>Typora</code></a>，写md很舒服，不过后面开始收费了。就是有个问题，只能在保存在本地，图片用了OSS后可以自动上传云端了还可以，但是文件始终还是保存在本地的。</p><p>后面发现了一个云端的文档写作–<a href="https://www.yuque.com">语雀</a>，可以在线编辑并且保存到云端，用了一段时间后总感觉样式差点，没有夜间模式，写多了一点还会有点卡。就没怎么用了。</p><p>某个悄然的时机，发现了wolai，UI设计很好看，其他方面也不错，推荐</p><p>记一下在网上写过所有的地址</p><ol><li class="lvl-3"><p>CSDN:  <a href="http://csdn.yujing.fit">http://csdn.yujing.fit</a><br>社区类型，域名收费自定义，可通过域名重定向更改域名，但是流量好像蛮多的，</p></li><li class="lvl-3"><p>博客园: <a href="https://www.cnblogs.com/JustBloom/">https://www.cnblogs.com/JustBloom/</a><br>社区类型，几乎都是免费的，自定义外观域名等</p></li><li class="lvl-3"><p>wolai:  <a href="https://www.wolai.com/justbloom%EF%BC%8C%E5%B7%B2%E7%99%BB%E5%BD%95%E5%8F%AF%E7%9B%B4%E6%8E%A5%E8%AE%BF%E9%97%AE">https://www.wolai.com/justbloom，已登录可直接访问</a><a href="http://add.page">http://add.page</a>入管理页在线文档，需登录</p></li><li class="lvl-3"><p>语雀: <a href="https://www.yuque.com/justbloom">https://www.yuque.com/justbloom</a><br>在线文档，公共访问</p></li><li class="lvl-3"><p>GitBook:  <a href="https://gitbook.yujing.fit">https://gitbook.yujing.fit</a><br>在线文档，很慢，感觉很适合写产品文档，VitePress写产品文档也很不错</p></li><li class="lvl-3"><p>baklib：<a href="https://89c884.bk-free01.com/">https://89c884.bk-free01.com/</a><br>在线文档，感觉md支持不太好，域名自定义也收费，但是主题设计蛮好看。</p></li><li class="lvl-3"><p>HashNode: <a href="https://tiam.hashnode.dev/">https://tiam.hashnode.dev/</a><br>个人博客类，用的较少，感觉还不错的</p></li><li class="lvl-3"><p>flomo：<a href="https://v.flomoapp.com/mine">https://v.flomoapp.com/mine</a><br>需登录查看，记录一些精短的想法灵感，联合微信，很方便，但是不太适合长篇的笔记</p></li><li class="lvl-3"><p>石墨文档： <a href="https://shimo.im/space">https://shimo.im/space</a><br>私有文档，需登录查看（公布收费）</p></li><li class="lvl-4"><p>简书：<a href="https://www.jianshu.com/u/3a1f1d78b611">https://www.jianshu.com/u/3a1f1d78b611</a><br>社区类型，用的比较少</p></li><li class="lvl-4"><p>微信公众号：带着月亮申请好像有点麻烦</p></li><li class="lvl-4"><p>个人博客：🔗<a href="https://yujing.fit/">https://yujing.fit/</a><br>使用<code>hexo</code>+<code>butterfly</code>主题搭建的博客，感觉这个主题很好看被搜索引擎收录挺麻烦，很难被查询到，只是对自己写笔记自己看还不错</p></li><li class="lvl-4"><p>VitePress：🔗<a href="https://docs.yujing.fit/">https://docs.yujing.fit/</a><br>个人搭建，需要一点技术，但不多</p></li></ol><p>还有一些其他社区平台，比如</p><ul class="lvl-0"><li class="lvl-2"><p>稀土掘金：🔗 <a href="https://juejin.cn/">https://juejin.cn/</a></p></li><li class="lvl-2"><p>阿里开发者社区：<strong><a href="https://developer.aliyun.com">https://developer.aliyun.com</a></strong></p></li><li class="lvl-2"><p>腾讯开发者：<a href="https://cloud.tencent.com/developer">https://cloud.tencent.com/developer</a></p></li><li class="lvl-2"><p>StackOverflow：<a href="https://stackoverflow.com/">https://stackoverflow.com/</a></p></li><li class="lvl-2"><p>开源中国：<a href="https://www.oschina.net/">https://www.oschina.net/</a></p></li><li class="lvl-2"><p>知乎：<a href="https://www.zhihu.com/">https://www.zhihu.com/</a>  （涉及领域就比较广泛了）</p></li><li class="lvl-2"><p>思否：<a href="http://sf.gg">http://sf.gg</a></p></li></ul><p>都可以自己注册账号发布文章笔记等</p><h2 id="总结">总结<a class="header-anchor" href="#总结">#</a></h2><ul class="lvl-0"><li class="lvl-2"><p>想自己的文章可以被更多人访问，可以选择社区类的，注册账号就行很简单</p><blockquote><ul class="lvl-3"><li class="lvl-2">CSDN</li><li class="lvl-2">博客园</li><li class="lvl-2">掘金</li><li class="lvl-2">…</li></ul></blockquote></li><li class="lvl-2"><p>写文章需求量大，需要写很多的</p><blockquote><ul class="lvl-3"><li class="lvl-2">wolai</li><li class="lvl-2">语雀</li><li class="lvl-2">石墨</li><li class="lvl-2">gitbook</li><li class="lvl-2">baklib</li></ul></blockquote></li><li class="lvl-2"><p>只是自己记录笔记方便自己查看，可以自己搭建一个，个人博客类</p><blockquote><ul class="lvl-3"><li class="lvl-2">hexo</li><li class="lvl-2">VitePress</li><li class="lvl-2">HashNode</li></ul></blockquote></li></ul><h2 id="规划">规划<a class="header-anchor" href="#规划">#</a></h2><ul class="lvl-0"><li class="lvl-2"><p><code>CSDN</code>记录报错，有流量，也方便帮助其他人踩坑📉🔗</p></li><li class="lvl-2"><p><code>wolai</code> 记录整体的笔记，比如想学ts，就可以将全部ts相关的记录在<code>wolai</code>，因为这种一般比较会比较多，不太适合发布到一篇文章</p></li><li class="lvl-2"><p>个人博客随便写一些文章，记录一些自己的理解。</p></li><li class="lvl-2"><p>等有了自己比较大的项目时，可以考虑<code>gitbook</code> 、<code>语雀</code>、 <code>vitePress</code>写一个完整的产品文档，介绍以及使用说明</p></li></ul><blockquote><p><strong>个人观点，仅供参考，以实际使用为准</strong></p></blockquote>]]></content>
-      
-      
-      <categories>
-          
-          <category> 推荐 </category>
-          
-      </categories>
-      
       
     </entry>
     
