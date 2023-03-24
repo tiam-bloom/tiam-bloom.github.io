@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>奇怪的间隙和垂直对齐问题</title>
+      <link href="/artical/36e17eed.html"/>
+      <url>/artical/36e17eed.html</url>
+      
+        <content type="html"><![CDATA[<h1>奇怪的间隙和垂直对齐问题</h1><p>一个基本的搜索框和按钮, 没有任何样式</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;search&quot;</span> <span class="attr">name</span>=<span class="string">&quot;keywords&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span>&gt;</span>搜索<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure><p>chrome浏览器下, 默认应该是这样的:</p><p><img src="http://qiniu.yujing.fit/typora_img/image-20230324095001413.png" alt="image-20230324095001413"></p><p>经过检查, input和button都没有外边距, 那么之间的空隙哪里来的呢?</p><p>其实是由于input和button之间的换行导致的, 换行符被浏览器解析为了一个空格</p><p>将换行去掉后</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;search&quot;</span> <span class="attr">name</span>=<span class="string">&quot;keywords&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">button</span>&gt;</span>搜索<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure><p>间隙消失了</p><p><img src="http://qiniu.yujing.fit/typora_img/image-20230324095339648.png" alt="image-20230324095339648"></p><p>那这里就必须不能换行吗?</p><p>并不是, 换行也是字符, 可以通过<code>font-size:0;</code>将其隐藏掉, 也能达到同样效果</p><blockquote><p>需注意的是, <code>font-size</code>是可继承的属性, 可能会影响后代元素中字体的大小, 所以还需要在后代元素中重新设置字体大小, 一般默认字体大小为16px</p><p>不过这里并不影响, 因为默认样式的优先级大于所继承样式的优先级</p></blockquote><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">form</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote><p><code>font-size</code>属性会影响input框的大小! input中的字体设置变大, input框自然也跟着变大</p></blockquote><hr><p>第二个问题就是, input和button其实并不在同一水平线上, button更向下一点点, (不过这里并不明显, 因为默认的尺寸都比较小, 这里也易被忽越了)</p><p>为了便于观察, 为form添加一个边框</p><p><img src="http://qiniu.yujing.fit/typora_img/image-20230324100959854.png" alt="image-20230324100959854"></p><p>可以看到input和下边框之间, 其实是有一点点缝隙的.</p><p>在按钮button和input中添加一些字母X,(为什么是X? 因为X下对齐的线, 叫做基线)</p><p>默认元素垂直对齐方式是 基线对齐, 所以这里两个元素中X下的线, 是对齐的</p><p><img src="http://qiniu.yujing.fit/typora_img/image-20230324101307559.png" alt="image-20230324101307559"></p><p>怎么解决?</p><p>重新设置元素垂直对齐方式就可以了, <code>vertical-align</code> 默认值是 <code>baseline</code> (基线对齐)</p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">/* 加在botton上也是可以的 */</span></span><br><span class="line"><span class="selector-tag">input</span> &#123;</span><br><span class="line">     <span class="attribute">vertical-align</span>: bottom;  <span class="comment">/* 向下对齐 */</span></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure><p><img src="http://qiniu.yujing.fit/typora_img/image-20230324102039967.png" alt="image-20230324102039967"></p><hr><blockquote><p><em>水平上 奇怪的间隙, 考虑考虑是不是由于 换行符 导致</em></p><p><em>垂直上 奇怪的间隙, 考虑考虑是否由于 基线对齐 导致</em></p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> HTML </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> font-size </tag>
+            
+            <tag> vertical-align </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Mysql5.7安装记录</title>
       <link href="/artical/b7c158be.html"/>
       <url>/artical/b7c158be.html</url>
