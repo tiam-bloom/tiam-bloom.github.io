@@ -517,9 +517,9 @@
       
         <tags>
             
-            <tag> js </tag>
-            
             <tag> cookie </tag>
+            
+            <tag> js </tag>
             
         </tags>
       
@@ -719,11 +719,11 @@
       
         <tags>
             
-            <tag> TailwindCss </tag>
-            
             <tag> chatGPT </tag>
             
             <tag> vue </tag>
+            
+            <tag> TailwindCss </tag>
             
         </tags>
       
@@ -941,6 +941,8 @@
       
         <tags>
             
+            <tag> TailwindCss </tag>
+            
             <tag> Vite </tag>
             
             <tag> Vue3 </tag>
@@ -950,8 +952,6 @@
             <tag> Pinia </tag>
             
             <tag> Element plus </tag>
-            
-            <tag> TailwindCss </tag>
             
             <tag> FontAwesome </tag>
             
