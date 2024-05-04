@@ -4,6 +4,44 @@
   
     
     <entry>
+      <title>protobuf协议逆向解析</title>
+      <link href="/artical/4966f9af.html"/>
+      <url>/artical/4966f9af.html</url>
+      
+        <content type="html"><![CDATA[<h1>protobuf协议逆向解析</h1><p>地址:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aHR0cHM6Ly93d3cudGlrdG9rLmNvbS9tZXNzYWdlcz9sYW5nPWVu</span><br></pre></td></tr></table></figure><p>找到接口<code>/v2/message/get_by_user_init</code></p><p>如图所示, 参数和响应并不是可直接使用的, 虽然部分内容可读。</p><p><img src="http://qiniu.yujing.icu/typora_img/image-20240425232955728.png" alt="image-20240425232955728"></p><p>跟栈到这里， 找到封包前的数据</p><p><img src="http://qiniu.yujing.icu/typora_img/image-20240425233256490.png" alt="image-20240425233256490"></p><p>打上断点， 查看变量<code>t</code>就是请求参数, 经过<code>encode</code>封包为二进制数据后 发送请求</p><p><img src="http://qiniu.yujing.icu/typora_img/image-20240425233453884.png" alt="image-20240425233453884"></p><p>把变量对象<code>t</code>复制到一个<code>json</code>格式化的地方, 方便后续查看</p><p><img src="http://qiniu.yujing.icu/typora_img/image-20240425233920672.png" alt="image-20240425233920672"></p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 接收一个 ArrayBuffer, 转为base64字符串</span></span><br><span class="line"><span class="variable language_">window</span>.<span class="property">arrayBufferToBase64</span> = <span class="keyword">function</span>(<span class="params">buffer</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> binary = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">  <span class="keyword">const</span> bytes = <span class="keyword">new</span> <span class="title class_">Uint8Array</span>(buffer);</span><br><span class="line">  <span class="keyword">const</span> len = bytes.<span class="property">byteLength</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">    binary += <span class="title class_">String</span>.<span class="title function_">fromCharCode</span>(bytes[i]);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="variable language_">window</span>.<span class="title function_">btoa</span>(binary);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><img src="http://qiniu.yujing.icu/typora_img/image-20240425234246364.png" alt="image-20240425234246364"></p><p>把base64字符串复制到这里 =&gt; <a href="https://protobuf-decoder.netlify.app/">Protobuf Decoder (protobuf-decoder.netlify.app)</a></p><p>这是一个在线解析protobuf协议数据的网站, 如图</p><blockquote><p>其实这里就可以还原数据结构了, 只是不知道这些字段的意义; 而刚刚的json数据就可以帮忙对比出它原本的字段名, 进而了解字段的大概意义.</p></blockquote><p><img src="http://qiniu.yujing.icu/typora_img/image-20240425235050804.png" alt="image-20240425235050804"></p><p>下载<code>protoc</code>编译器, 注意下载对应的系统版本, 下载地址这里: <a href="https://github.com/protocolbuffers/protobuf/releases/latest">https://github.com/protocolbuffers/protobuf/releases/latest</a></p><p>下载后解压把<code>bin</code>目录添加到系统环境中, 出现下面就算是成功了</p><p><img src="http://qiniu.yujing.icu/typora_img/image-20240425235844097.png" alt="image-20240425235844097"></p><p>然后开始准备构建<code>.proto</code>文件数据结构</p><p><img src="C:%5CUsers%5CTiam%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20240426004836471.png" alt="image-20240426004836471"></p><p>就可以大概推出下面这个数据结构</p><blockquote><p>有的实在找不到对应的变量名, 你任意取一个名字也不影响, 你能懂就好</p><p>数据类型参考这里的表: <a href="https://protobuf.dev/programming-guides/proto3/#scalar">语言指南 （proto 3） |协议缓冲区文档 (protobuf.dev)</a></p></blockquote><p><img src="C:%5CUsers%5CTiam%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20240426004748311.png" alt="image-20240426004748311"></p><p>然后这里使用的是python的<a href="https://github.com/danielgtaylor/python-betterproto">betterproto</a>库, 比官方的好用多了.</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install betterproto</span><br></pre></td></tr></table></figure><p>使用编译命令</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">protoc -I . --python_betterproto_out=lib example.proto # 生成类</span><br></pre></td></tr></table></figure><blockquote><ul class="lvl-1"><li class="lvl-2"><p><code>protoc</code>：这是 Protocol Buffers 编译器的命令行工具。</p></li><li class="lvl-2"><p><code>-I .</code>：这个选项指定了编译器搜索 <code>.proto</code> 文件的目录。<code>-I</code> 表示“include”，后面的点（<code>.</code>）表示当前目录。所以，这个命令告诉 <code>protoc</code> 只在当前目录下查找 <code>.proto</code> 文件。</p></li><li class="lvl-2"><p><code>--python_betterproto_out=lib</code>：这是编译器的一个输出选项，用于指定生成的代码应该放在哪个目录。<code>--python_betterproto_out</code> 是一个自定义的输出插件，它生成使用 <code>betterproto</code> 库的 Python 代码。<code>betterproto</code> 是一个用于处理 Protocol Buffers 的 Python 库，它提供了更现代的 API 和一些额外的功能。<code>lib</code> 表示生成的代码应该放在名为 <code>lib</code> 的目录中。</p></li><li class="lvl-2"><p><code>example.proto</code>：这是要编译的 Protocol Buffers 定义文件的名称。</p></li></ul><p>有其他问题看官方文档: <a href="https://github.com/danielgtaylor/python-betterproto">danielgtaylor/python-betterproto: Clean, modern, Python 3.6+ code generator &amp; library for Protobuf 3 and async gRPC (github.com)</a></p></blockquote><p>会生成两个文件, 其中一个里面会有下面这个类, 另一个应该是空的， 不用管</p><p><img src="http://qiniu.yujing.icu/typora_img/image-20240426003707530.png" alt="image-20240426003707530"></p><p>万事具备, 测试一下是否可用</p><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> . <span class="keyword">import</span> GetByUserInitRequest  <span class="comment"># 导入刚生成的类</span></span><br><span class="line"></span><br><span class="line">base64_str = <span class="string">&#x27;CMsBEJFOGgUxLjAuOSIAKAMwADofODY0MjQwZDpyZWxlYXNlLXdlYmFwcC0yMDI0MDQwOEIF2gwCCABKEzczNTcxODg0MDg3MjM1MDY3MThaA3dlYnoyCgdyZWZlcmVyEidodHRwczovL3d3dy50aWt0b2suY29tL21lc3NhZ2VzP2xhbmc9ZW56EgoKZnJvbV9hcHBJRBIEMTk4OHoSCgxhcHBfbGFuZ3VhZ2USAmVuehYKCGFwcF9uYW1lEgp0aWt0b2tfd2Vieg4KB2NoYW5uZWwSA3dlYnp9Cgp1c2VyX2FnZW50Em9Nb3ppbGxhLzUuMCAoV2luZG93cyBOVCAxMC4wOyBXaW42NDsgeDY0KSBBcHBsZVdlYktpdC81MzcuMzYgKEtIVE1MLCBsaWtlIEdlY2tvKSBDaHJvbWUvMTI0LjAuMC4wIFNhZmFyaS81MzcuMzZ6gAEKEFdlYi1TZGstTXMtVG9rZW4SbGhsUU1XRERwRkhfRlZWSXZGVVpxbFBaMmJJUGlyclJvSFJxWmhpbGE0ajB2ZjVqajRnZVVXbVd5NjAzbXVqVUdjQTlfQzhQVXpNM01GT1JDYWoxajR0Xzl4MTNkVUJoMHd6T3BTLV9CN2NVPZABAQ==&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(GetByUserInitRequest().parse(base64.b64decode(base64_str)).to_json(indent=<span class="number">2</span>))</span><br></pre></td></tr></table></figure><p>能正常解析出所有数据就没什么问题</p><p><img src="C:%5CUsers%5CTiam%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20240426005912331.png" alt="image-20240426005912331"></p><p>PS: 前面断点没注意, 不是同一个url😂,(本想以<code>get_by_user_init</code>接口举例的, 但是断点那里的接口是<code>get_by_user</code>) 但是思路是这么个思路</p><p>有更好更方便的方法欢迎指导</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Python </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> protobuf </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Qexo</title>
+      <link href="/artical/26023127.html"/>
+      <url>/artical/26023127.html</url>
+      
+        <content type="html"><![CDATA[<p>这是一篇在Qexo中写的新文章</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>原型与继承</title>
       <link href="/artical/cc502626.html"/>
       <url>/artical/cc502626.html</url>
